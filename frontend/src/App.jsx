@@ -13,6 +13,8 @@ import AdminStoreDetails from './pages/admin/AdminStoreDetails';
 import AdminSettings from './pages/admin/AdminSettings';
 import UserStores from './pages/user/UserStores';
 import UserSettings from './pages/user/UserSettings';
+import OwnerDashboard from './pages/owner/OwnerDashboard';
+import OwnerSettings from './pages/owner/OwnerSettings';
 
 function HomeRedirect() {
   const { user, loading } = useAuth();
@@ -39,6 +41,8 @@ function App() {
           <Route path="/admin/settings" element={<ProtectedRoute roles={['ADMIN']}><AdminSettings /></ProtectedRoute>} />
           <Route path="/stores" element={<ProtectedRoute roles={['USER']}><UserStores /></ProtectedRoute>} />
           <Route path="/user/settings" element={<ProtectedRoute roles={['USER']}><UserSettings /></ProtectedRoute>} />
+          <Route path="/owner" element={<ProtectedRoute roles={['STORE_OWNER']}><OwnerDashboard /></ProtectedRoute>} />
+          <Route path="/owner/settings" element={<ProtectedRoute roles={['STORE_OWNER']}><OwnerSettings /></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
