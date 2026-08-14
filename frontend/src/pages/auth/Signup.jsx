@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
 import { signupSchema } from '../../utils/validation';
+import { getApiErrorMessage, setFormApiErrors } from '../../utils/errors';
 import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
 
@@ -14,6 +15,7 @@ export default function Signup() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(signupSchema) });
 
@@ -23,7 +25,9 @@ export default function Signup() {
       toast.success('Account created successfully');
       navigate('/stores');
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Signup failed');
+      if (!setFormApiErrors(err, setError)) {
+        toast.error(getApiErrorMessage(err, 'Signup failed'));
+      }
     }
   };
 

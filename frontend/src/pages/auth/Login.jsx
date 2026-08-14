@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
 import { loginSchema } from '../../utils/validation';
+import { getApiErrorMessage, setFormApiErrors } from '../../utils/errors';
 import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
 
@@ -16,6 +17,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(loginSchema) });
 
@@ -30,7 +32,9 @@ export default function Login() {
       toast.success('Logged in successfully');
       navigate(redirectByRole(user.role));
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Login failed');
+      if (!setFormApiErrors(err, setError)) {
+        toast.error(getApiErrorMessage(err, 'Login failed'));
+      }
     }
   };
 
