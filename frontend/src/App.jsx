@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import LoadingSpinner from './components/LoadingSpinner';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 function HomeRedirect() {
   const { user, loading } = useAuth();
@@ -23,9 +24,7 @@ function App() {
           <Route path="/" element={<HomeRedirect />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/admin" element={<ProtectedRoute roles={['ADMIN']}><div>Admin Dashboard</div></ProtectedRoute>} />
-          <Route path="/stores" element={<ProtectedRoute roles={['USER']}><div>User Stores</div></ProtectedRoute>} />
-          <Route path="/owner" element={<ProtectedRoute roles={['STORE_OWNER']}><div>Owner Dashboard</div></ProtectedRoute>} />
+          <Route path="/admin" element={<ProtectedRoute roles={['ADMIN']}><AdminDashboard /></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
