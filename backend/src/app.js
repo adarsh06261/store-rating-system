@@ -1,0 +1,17 @@
+import express from 'express';
+import cors from 'cors';
+import { env } from './config/env.js';
+import { errorHandler } from './middleware/errorHandler.js';
+
+const app = express();
+
+app.use(cors({ origin: env.frontendUrl, credentials: true }));
+app.use(express.json());
+
+app.get('/api/health', (req, res) => {
+  res.json({ success: true, message: 'Store Rating System API is running' });
+});
+
+app.use(errorHandler);
+
+export default app;
