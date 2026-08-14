@@ -30,6 +30,7 @@ export default function AdminStores() {
   const [sortBy, setSortBy] = useState('createdAt');
   const [sortOrder, setSortOrder] = useState('desc');
   const [minRating, setMinRating] = useState('');
+  const [maxRating, setMaxRating] = useState('');
   const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [owners, setOwners] = useState([]);
@@ -40,6 +41,7 @@ export default function AdminStores() {
     sortBy,
     sortOrder,
     minRating: minRating || undefined,
+    maxRating: maxRating || undefined,
     page,
     limit: 10,
   });
@@ -78,9 +80,18 @@ export default function AdminStores() {
           onChange={(e) => { setMinRating(e.target.value); setPage(1); }}
           className="px-3 py-2 border border-gray-300 rounded-lg"
         >
-          <option value="">All Ratings</option>
+          <option value="">Min Rating</option>
           <option value="4">4+ Stars</option>
           <option value="3">3+ Stars</option>
+        </select>
+        <select
+          value={maxRating}
+          onChange={(e) => { setMaxRating(e.target.value); setPage(1); }}
+          className="px-3 py-2 border border-gray-300 rounded-lg"
+        >
+          <option value="">Max Rating</option>
+          <option value="5">Up to 5 Stars</option>
+          <option value="4">Up to 4 Stars</option>
         </select>
         <select
           value={`${sortBy}-${sortOrder}`}

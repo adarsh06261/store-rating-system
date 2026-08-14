@@ -15,6 +15,7 @@ export default function UserStores() {
   const [sortBy, setSortBy] = useState('name');
   const [sortOrder, setSortOrder] = useState('asc');
   const [minRating, setMinRating] = useState('');
+  const [maxRating, setMaxRating] = useState('');
   const [page, setPage] = useState(1);
   const [ratingStore, setRatingStore] = useState(null);
   const [selectedRating, setSelectedRating] = useState(0);
@@ -26,6 +27,7 @@ export default function UserStores() {
     sortBy,
     sortOrder,
     minRating: minRating || undefined,
+    maxRating: maxRating || undefined,
     page,
     limit: 9,
   });
@@ -69,9 +71,20 @@ export default function UserStores() {
           onChange={(e) => { setMinRating(e.target.value); setPage(1); }}
           className="px-3 py-2 border border-gray-300 rounded-lg"
         >
-          <option value="">All Ratings</option>
+          <option value="">Min Rating</option>
           <option value="4">4+ Stars</option>
           <option value="3">3+ Stars</option>
+          <option value="2">2+ Stars</option>
+        </select>
+        <select
+          value={maxRating}
+          onChange={(e) => { setMaxRating(e.target.value); setPage(1); }}
+          className="px-3 py-2 border border-gray-300 rounded-lg"
+        >
+          <option value="">Max Rating</option>
+          <option value="5">Up to 5 Stars</option>
+          <option value="4">Up to 4 Stars</option>
+          <option value="3">Up to 3 Stars</option>
         </select>
         <select
           value={`${sortBy}-${sortOrder}`}
