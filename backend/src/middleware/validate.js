@@ -9,7 +9,7 @@ export const validate = (schema) => (req, res, next) => {
 
 export const validateQuery = (schema) => (req, res, next) => {
   try {
-    req.query = schema.parse(req.query);
+    req.validatedQuery = schema.parse(req.query);
     next();
   } catch (error) {
     next(error);
