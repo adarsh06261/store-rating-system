@@ -6,6 +6,11 @@ import LoadingSpinner from './components/LoadingSpinner';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminUsers from './pages/admin/AdminUsers';
+import AdminUserDetails from './pages/admin/AdminUserDetails';
+import AdminStores from './pages/admin/AdminStores';
+import AdminStoreDetails from './pages/admin/AdminStoreDetails';
+import AdminSettings from './pages/admin/AdminSettings';
 
 function HomeRedirect() {
   const { user, loading } = useAuth();
@@ -25,6 +30,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin" element={<ProtectedRoute roles={['ADMIN']}><AdminDashboard /></ProtectedRoute>} />
+          <Route path="/admin/users" element={<ProtectedRoute roles={['ADMIN']}><AdminUsers /></ProtectedRoute>} />
+          <Route path="/admin/users/:id" element={<ProtectedRoute roles={['ADMIN']}><AdminUserDetails /></ProtectedRoute>} />
+          <Route path="/admin/stores" element={<ProtectedRoute roles={['ADMIN']}><AdminStores /></ProtectedRoute>} />
+          <Route path="/admin/stores/:id" element={<ProtectedRoute roles={['ADMIN']}><AdminStoreDetails /></ProtectedRoute>} />
+          <Route path="/admin/settings" element={<ProtectedRoute roles={['ADMIN']}><AdminSettings /></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
