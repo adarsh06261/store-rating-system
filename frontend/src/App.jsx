@@ -11,6 +11,8 @@ import AdminUserDetails from './pages/admin/AdminUserDetails';
 import AdminStores from './pages/admin/AdminStores';
 import AdminStoreDetails from './pages/admin/AdminStoreDetails';
 import AdminSettings from './pages/admin/AdminSettings';
+import UserStores from './pages/user/UserStores';
+import UserSettings from './pages/user/UserSettings';
 
 function HomeRedirect() {
   const { user, loading } = useAuth();
@@ -35,6 +37,8 @@ function App() {
           <Route path="/admin/stores" element={<ProtectedRoute roles={['ADMIN']}><AdminStores /></ProtectedRoute>} />
           <Route path="/admin/stores/:id" element={<ProtectedRoute roles={['ADMIN']}><AdminStoreDetails /></ProtectedRoute>} />
           <Route path="/admin/settings" element={<ProtectedRoute roles={['ADMIN']}><AdminSettings /></ProtectedRoute>} />
+          <Route path="/stores" element={<ProtectedRoute roles={['USER']}><UserStores /></ProtectedRoute>} />
+          <Route path="/user/settings" element={<ProtectedRoute roles={['USER']}><UserSettings /></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
